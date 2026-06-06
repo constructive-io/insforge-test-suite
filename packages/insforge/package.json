@@ -1,0 +1,22 @@
+{
+  "name": "@pgpm/insforge",
+  "version": "0.1.0",
+  "author": "Constructive <developers@constructive.io>",
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "lint": "eslint . --fix",
+    "test": "jest",
+    "test:watch": "jest --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/constructive-io/insforge-test-suite"
+  },
+  "homepage": "https://github.com/constructive-io/insforge-test-suite",
+  "bugs": {
+    "url": "https://github.com/constructive-io/insforge-test-suite/issues"
+  }
+}

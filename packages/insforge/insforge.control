@@ -1,0 +1,7 @@
+# insforge extension
+comment = 'insforge extension'
+default_version = '0.0.1'
+module_pathname = '$libdir/insforge'
+requires = 'plpgsql'
+relocatable = false
+superuser = false

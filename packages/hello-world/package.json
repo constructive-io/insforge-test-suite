@@ -1,0 +1,14 @@
+{
+  "name": "@pgpm/hello-world",
+  "version": "0.1.0",
+  "author": "Constructive <developers@constructive.io>",
+  "description": "Hello World extension with Row Level Security (RLS) demo for InsForge",
+  "private": true,
+  "scripts": {
+    "clean": "rimraf dist/**",
+    "lint": "eslint . --fix",
+    "test": "jest",
+    "test:watch": "jest --watch"
+  },
+  "keywords": []
+}

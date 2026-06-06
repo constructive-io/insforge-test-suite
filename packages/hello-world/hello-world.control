@@ -1,0 +1,7 @@
+# hello-world extension
+comment = 'RLS demo extension with users and products tables for InsForge'
+default_version = '0.0.1'
+module_pathname = '$libdir/hello-world'
+requires = 'plpgsql,insforge'
+relocatable = false
+superuser = false
