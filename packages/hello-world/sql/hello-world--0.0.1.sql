@@ -1,8 +1,4 @@
--- Deploy: rls-demo to pg
--- made with <3 @ constructive.io
-
-BEGIN;
-
+\echo Use "CREATE EXTENSION hello-world" to load this file. \quit
 CREATE SCHEMA IF NOT EXISTS rls_test;
 
 CREATE TABLE IF NOT EXISTS rls_test.pets (
@@ -51,5 +47,3 @@ CREATE TRIGGER update_pets_updated_at
     BEFORE UPDATE ON rls_test.pets
     FOR EACH ROW
     EXECUTE FUNCTION rls_test.update_updated_at_column();
-
-COMMIT;

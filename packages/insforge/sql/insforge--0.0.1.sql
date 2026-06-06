@@ -1,12 +1,6 @@
--- Deploy: insforge to pg
--- made with <3 @ constructive.io
-
-BEGIN;
-
--- Auth schema
+\echo Use "CREATE EXTENSION insforge" to load this file. \quit
 CREATE SCHEMA IF NOT EXISTS auth;
 
--- Auth functions (used in RLS policies)
 CREATE FUNCTION auth.uid() RETURNS uuid
     LANGUAGE sql STABLE
     AS $$
@@ -25,7 +19,6 @@ CREATE FUNCTION auth.role() RETURNS text
   SELECT NULLIF(current_setting('request.jwt.claim.role', true), '')::text;
 $$;
 
--- Auth users table (minimal, matches InsForge auth schema)
 CREATE TABLE auth.users (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     email TEXT UNIQUE,
@@ -36,20 +29,15 @@ CREATE TABLE auth.users (
     updated_at TIMESTAMPTZ DEFAULT now()
 );
 
--- Grants: public schema access for all roles
 GRANT USAGE ON SCHEMA public TO anon;
 GRANT USAGE, SELECT ON ALL SEQUENCES IN SCHEMA public TO anon;
-
 GRANT USAGE ON SCHEMA public TO authenticated;
 GRANT USAGE, SELECT ON ALL SEQUENCES IN SCHEMA public TO authenticated;
-
 GRANT USAGE ON SCHEMA public TO project_admin;
 GRANT USAGE, SELECT ON ALL SEQUENCES IN SCHEMA public TO project_admin;
-
 GRANT SELECT, INSERT, UPDATE, DELETE ON ALL TABLES IN SCHEMA public TO anon, authenticated, project_admin;
 ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT SELECT, INSERT, UPDATE, DELETE ON TABLES TO anon, authenticated, project_admin;
 
--- Grants: auth schema access
 GRANT USAGE ON SCHEMA auth TO authenticated;
 GRANT USAGE ON SCHEMA auth TO project_admin;
 GRANT SELECT ON auth.users TO authenticated;
@@ -58,7 +46,6 @@ GRANT EXECUTE ON FUNCTION auth.uid() TO anon, authenticated, project_admin;
 GRANT EXECUTE ON FUNCTION auth.email() TO anon, authenticated, project_admin;
 GRANT EXECUTE ON FUNCTION auth.role() TO anon, authenticated, project_admin;
 
--- Auto-RLS: event trigger to create project_admin policy on CREATE TABLE
 CREATE FUNCTION public.create_default_policies()
 RETURNS event_trigger AS $$
 DECLARE
@@ -94,7 +81,6 @@ CREATE EVENT TRIGGER create_policies_on_table_create
   WHEN TAG IN ('CREATE TABLE')
   EXECUTE FUNCTION public.create_default_policies();
 
--- Auto-RLS: event trigger for ALTER TABLE (RLS enabled after creation)
 CREATE FUNCTION public.create_policies_after_rls()
 RETURNS event_trigger AS $$
 DECLARE
@@ -131,5 +117,3 @@ CREATE EVENT TRIGGER create_policies_on_rls_enable
   ON ddl_command_end
   WHEN TAG IN ('ALTER TABLE')
   EXECUTE FUNCTION public.create_policies_after_rls();
-
-COMMIT;

@@ -1,5 +1,24 @@
 {
   "$schema": "node_modules/lerna/schemas/lerna-schema.json",
-  "version": "0.1.0",
-  "npmClient": "pnpm"
+  "version": "independent",
+  "npmClient": "pnpm",
+  "npmClientArgs": [
+    "--frozen-lockfile"
+  ],
+  "packages": [
+    "packages/*"
+  ],
+  "registry": "https://registry.npmjs.org",
+  "command": {
+    "create": {
+      "homepage": "https://github.com/constructive-io/insforge-test-suite",
+      "license": "SEE LICENSE IN LICENSE",
+      "access": "restricted"
+    },
+    "publish": {
+      "allowBranch": "main",
+      "message": "chore(release): publish",
+      "conventionalCommits": true
+    }
+  }
 }
