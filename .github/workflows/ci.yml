@@ -79,8 +79,11 @@ jobs:
       - name: Install pgpm CLI globally
         run: npm install -g pgpm
 
-      - name: Seed pg and app_user
+      - name: Bootstrap roles and seed test users
         run: |
+          # InsForge image is vanilla Postgres — no pre-created roles
+          # (unlike Supabase where `supabase start` creates them)
+          pgpm admin-users bootstrap --yes
           pgpm admin-users add --test --yes
 
       - name: Test ${{ matrix.package }}

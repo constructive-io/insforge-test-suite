@@ -16,9 +16,12 @@ Built with [`insforge-test`](https://www.npmjs.com/package/insforge-test) — an
 ```sh
 docker-compose up -d
 pnpm install
+make roles
 cd packages/hello-world
 pnpm test:watch
 ```
+
+> **Note:** Unlike Supabase (where `supabase start` pre-creates roles), the InsForge Docker image is vanilla Postgres. `make roles` runs `pgpm admin-users bootstrap` to create the `anon`, `authenticated`, and `project_admin` NOLOGIN roles before seeding test users.
 
 ## InsForge Roles
 

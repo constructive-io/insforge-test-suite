@@ -9,6 +9,7 @@ ssh:
 	docker exec -it postgres /bin/bash
 
 roles:
+	pgpm admin-users bootstrap --yes
 	pgpm admin-users add --test --yes
 
 install:
