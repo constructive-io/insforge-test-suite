@@ -1,0 +1,59 @@
+name: Portability tests
+on:
+  push:
+  pull_request:
+    types: [opened, synchronize, reopened]
+  workflow_dispatch:
+
+jobs:
+  # Cross-shape transpilation, both directions, on plain PostgreSQL. The forward
+  # direction deploys the pgpm-shaped package on a generic provider; the reverse
+  # deploys InsForge's native subsystem (the `insforge` module) and the
+  # transpiled app on top — no vendor image or CLI needed.
+  portability:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: ghcr.io/constructive-io/docker/postgres-plus:18
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: password
+        options: >-
+          --health-cmd "pg_isready -U postgres"
+          --health-interval 3s
+          --health-timeout 5s
+          --health-retries 10
+        ports:
+          - 5432:5432
+
+    env:
+      PGHOST: 127.0.0.1
+      PGPORT: 5432
+      PGUSER: postgres
+      PGPASSWORD: password
+
+    steps:
+      - name: Configure Git (for tests)
+        run: |
+          git config --global user.name "CI Test User"
+          git config --global user.email "ci@example.com"
+
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: 10
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: "pnpm"
+
+      - name: Install
+        run: pnpm install
+
+      - name: Test portability
+        run: cd ./portability/packages/portability-tests && pnpm test
