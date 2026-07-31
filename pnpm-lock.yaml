@@ -61,6 +61,33 @@ importers:
 
   packages/insforge: {}
 
+  portability/packages/portability-tests:
+    dependencies:
+      '@pgpmjs/bundle':
+        specifier: ^0.12.4
+        version: 0.12.4
+      '@pgpmjs/core':
+        specifier: 7.18.0
+        version: 7.18.0
+      '@pgpmjs/env':
+        specifier: 2.39.2
+        version: 2.39.2
+      '@pgpmjs/portability':
+        specifier: 0.2.0
+        version: 0.2.0
+      '@pgpmjs/slice':
+        specifier: 0.12.0
+        version: 0.12.0
+      '@pgpmjs/transform':
+        specifier: 0.13.0
+        version: 0.13.0
+      '@pgpmjs/types':
+        specifier: 2.48.1
+        version: 2.48.1
+      pgsql-test:
+        specifier: ^5.8.7
+        version: 5.8.7
+
 packages:
 
   12factor-env@1.25.1:
@@ -634,6 +661,9 @@ packages:
 
   '@pgpmjs/logger@2.22.1':
     resolution: {integrity: sha512-xRqaoBf9Sdw2v+PVZfdHsO8jg9ZWMntRRIk21lSFtPV40BYxcsTLDCyGycLTZr3Ao8FVRIOOsPiemUy4CuI7aQ==}
+
+  '@pgpmjs/portability@0.2.0':
+    resolution: {integrity: sha512-hly/DGyprFU98Q2oLG0f+rfvZsIq8OTedRvxwW9wyGcJk3JHNjQghDcH/rCSTyqpmhxO5+xHrHCU6Lko6hIhKA==}
 
   '@pgpmjs/server-utils@3.23.4':
     resolution: {integrity: sha512-+LYocviQk5aQW9XlUM8+NsGyFIEUZ9+raqxpl6Gi7dysRVQCsTG0Kx/9fK7G+WxGIC6jBtjjHGyErb72/ux/sg==}
@@ -4591,6 +4621,16 @@ snapshots:
   '@pgpmjs/logger@2.22.1':
     dependencies:
       yanse: 0.2.1
+
+  '@pgpmjs/portability@0.2.0':
+    dependencies:
+      '@pgpmjs/core': 7.18.0
+      '@pgpmjs/env': 2.39.2
+      '@pgpmjs/types': 2.48.1
+      pg-env: 1.26.1
+    transitivePeerDependencies:
+      - pg-native
+      - supports-color
 
   '@pgpmjs/server-utils@3.23.4':
     dependencies:

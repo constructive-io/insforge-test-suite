@@ -1,0 +1,23 @@
+{
+  "name": "@pgpm/portability-tests",
+  "version": "0.0.1",
+  "author": "Constructive <developers@constructive.io>",
+  "description": "Cross-shape transpilation tests for InsForge: subsystem substitution, role routing, bidirectional transforms via @pgpmjs/portability",
+  "private": true,
+  "scripts": {
+    "lint": "eslint . --fix",
+    "test": "jest --runInBand",
+    "test:watch": "jest --watch"
+  },
+  "dependencies": {
+    "@pgpmjs/bundle": "^0.12.4",
+    "@pgpmjs/core": "7.18.0",
+    "@pgpmjs/env": "2.39.2",
+    "@pgpmjs/portability": "0.2.0",
+    "@pgpmjs/slice": "0.12.0",
+    "@pgpmjs/transform": "0.13.0",
+    "@pgpmjs/types": "2.48.1",
+    "pgsql-test": "^5.8.7"
+  },
+  "keywords": []
+}

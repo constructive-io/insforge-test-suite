@@ -12,7 +12,8 @@
     "access": "restricted"
   },
   "workspaces": [
-    "packages/*"
+    "packages/*",
+    "portability/packages/*"
   ],
   "scripts": {
     "lint": "pnpm -r run lint",
