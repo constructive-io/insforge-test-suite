@@ -18,9 +18,12 @@
   "scripts": {
     "lint": "pnpm -r run lint",
     "test": "pnpm -r test",
-    "deps": "pnpm up -r -i -L"
+    "deps": "pnpm up -r -i -L",
+    "policy": "pnpm-policy generate",
+    "policy:check": "pnpm-policy check"
   },
   "devDependencies": {
+    "@constructive-io/pnpm-policy": "0.2.1",
     "@types/jest": "^29.5.14",
     "@types/node": "^22.10.2",
     "@typescript-eslint/eslint-plugin": "^8.15.0",
@@ -32,6 +35,7 @@
     "insforge-test": "^1.9.0",
     "jest": "^29.7.0",
     "lerna": "^8.2.4",
+    "pnpm-policy": "^0.2.2",
     "prettier": "^3.3.3",
     "ts-jest": "^29.2.5",
     "ts-node": "^10.9.2",
