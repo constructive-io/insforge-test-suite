@@ -35,6 +35,12 @@ intersect: true
 allowBuilds:
   "@launchql/protobufjs": postinstall runs scripts/postinstall to select/bundle the protobuf runtime for this platform; the package is inert without it.
   nx: postinstall runs bin/post-install to fetch the platform-specific nx native binary (@nx/nx-<platform>) the CLI needs to execute.
+  unrs-resolver: postinstall selects/loads the prebuilt napi-rs native binding for the current platform; the resolver package has no pure-JS fallback.
+
+# Install scripts pnpm would otherwise ask about; each ships a prebuilt binary as
+# an optional dependency and only compiles as a fallback we do not need.
+denyBuilds:
+  "@parcel/watcher": prebuilt binary ships as an optional dep
 
 # Third-party escape hatches. A reason is required; `until` expires the waiver so
 # `check` makes you re-justify it instead of letting it live forever.

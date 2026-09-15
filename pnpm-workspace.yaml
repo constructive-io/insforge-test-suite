@@ -2,12 +2,14 @@ packages:
   - 'packages/*'
   - 'portability/packages/*'
 
-# The only dependencies permitted to run install scripts.
+# Install scripts: true runs them, false means reviewed and not needed.
 allowBuilds:
   "@launchql/protobufjs": true # postinstall runs scripts/postinstall to select/bundle the protobuf runtime for this platform; the package is inert without it.
+  "@parcel/watcher": false # prebuilt binary ships as an optional dep
   nx: true # postinstall runs bin/post-install to fetch the platform-specific nx native binary (@nx/nx-<platform>) the CLI needs to execute.
+  unrs-resolver: true # postinstall selects/loads the prebuilt napi-rs native binding for the current platform; the resolver package has no pure-JS fallback.
 
-# Exempt from the wait: 6 scope glob(s), 24 first-party package(s).
+# Exempt from the wait: 6 scope glob(s), 25 first-party package(s).
 # First-party membership comes from what pyramation publishes on npm — waiting on your own release protects nothing.
 minimumReleaseAgeExclude:
   - "@constructive-db/*"
@@ -21,6 +23,7 @@ minimumReleaseAgeExclude:
   - csv-to-pg
   - find-and-require-package-json
   - genomic
+  - git-changed
   - inquirerer
   - insforge-test
   - libpg-query
