@@ -33,7 +33,6 @@ intersect: true
 
 # Dependencies allowed to run install scripts. The value is the reason.
 allowBuilds:
-  "@launchql/protobufjs": postinstall runs scripts/postinstall to select/bundle the protobuf runtime for this platform; the package is inert without it.
   nx: postinstall runs bin/post-install to fetch the platform-specific nx native binary (@nx/nx-<platform>) the CLI needs to execute.
   unrs-resolver: postinstall selects/loads the prebuilt napi-rs native binding for the current platform; the resolver package has no pure-JS fallback.
 
